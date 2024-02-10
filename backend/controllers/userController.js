@@ -131,7 +131,7 @@ const userSignIn = async (req, res) => {
   
 
 // Fetch the signed-in user information
-const getSignedInUser = async (req, res) => {
+{/*const getSignedInUser = async (req, res) => {
     try {
         // Assuming you've attached the signed-in user information to the request object during sign-in
         const signedInUser = req.user;
@@ -155,7 +155,7 @@ const getSignedInUser = async (req, res) => {
             error: error.message
         });
     }
-};
+};*/}
 
 //POST a single post
 const createPost = async (req, res) => {
@@ -172,6 +172,17 @@ const createPost = async (req, res) => {
     }
 };
 
+// GET post
+const getPosts = async (req, res) => {
+    try {
+        const posts = await PostModel.find().sort({ createdAt: -1 });
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+};
 
 // GET a single post
 const getPost = async (req, res) => {
@@ -195,12 +206,6 @@ const getPost = async (req, res) => {
     }
 };
 
-// GET all posts
-const getAllPost = async (req, res) => {
-    const posts = await PostModel.find({}).sort({createdAt: -1})
-    res.status(200).json(posts)
-};
-
 
 module.exports = {
     getUsers, 
@@ -209,8 +214,8 @@ module.exports = {
     deleteUser,
     updateUser,
     userSignIn,
-    getSignedInUser,
+    //getSignedInUser,
     createPost,
     getPost,
-    getAllPost
+    getPosts
 }

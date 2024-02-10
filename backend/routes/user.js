@@ -1,7 +1,7 @@
 const express = require ('express');
 const { createUser, getUsers, getUser, deleteUser, 
-        updateUser, userSignIn, getSignedInUser,
-        createPost, getPost, getAllPost } = require('../controllers/userController');
+        updateUser, userSignIn,
+        createPost, getPost, getPosts } = require('../controllers/userController');
 const { verifyToken } = require('../middleware/middleware');
 const router = express.Router()
 
@@ -24,10 +24,10 @@ router.patch('/:id', updateUser)
 router.post('/signIn', userSignIn)
 
 // Fetch the signed-in user information
-router.get('/signInUser', verifyToken, getSignedInUser);
+router.get('/signInUser', verifyToken);
 
 //GET all posts
-router.get('/post', getAllPost)
+router.get('/post', getPosts)
 
 //GET a single post
 router.get('/post/:postId', getPost)
